@@ -24,7 +24,9 @@ export function Main(props)
     return(
         <Card className={classes.root}>
             <Header/>
-            <SearchAppBar/>
+            <SearchAppBar
+             logout = {props.logout}
+            />
             <Content/>
         </Card>
     )

@@ -19,7 +19,9 @@ export function Home(props) {
                 xs='8'
                 style={{ margin: 'auto' }}
             >
-                <Main/>
+                <Main
+                    logout = {handleLogout}
+                />
             </Grid>
         </Container>
     )

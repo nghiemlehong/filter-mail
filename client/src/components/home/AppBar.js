@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SimpleMenu() {
+function SimpleMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -94,13 +94,13 @@ function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}><ExitToAppIcon/> Logout</MenuItem>
+        <MenuItem onClick={props.logout}><ExitToAppIcon/> Logout</MenuItem>
       </Menu>
     </div>
   );
 }
 
-export  function SearchAppBar() {
+export  function SearchAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -113,7 +113,9 @@ export  function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-           <SimpleMenu/>
+           <SimpleMenu
+            logout = {props.logout}
+           />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Lê Hồng Nghiệm

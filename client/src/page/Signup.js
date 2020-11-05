@@ -17,7 +17,7 @@ export function Signup(props) {
                  alignItems="center"
             >
                 <MediaCardSignup
-                back = {()=>handleBack()}
+                back = {handleBack}
                 
                 />
             </Grid>

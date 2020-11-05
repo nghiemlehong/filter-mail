@@ -18,7 +18,7 @@ export function Login(props) {
               alignItems="center"
               >
                  <MediaCard 
-                 signUp = {()=>handleSignUp()}
+                 signUp = {handleSignUp}
                  />
             </Grid>
         </Container>
