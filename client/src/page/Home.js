@@ -1,21 +1,25 @@
 import React from 'react'
-import {Container, Grid} from '@material-ui/core'
+import { Container, Grid } from '@material-ui/core'
 import {Main} from '../components/home/Main'
+import {NotificationContainer} from 'react-notifications'
 
+export function Home(props) {
 
-export function Home(props)
-{
-    return(
+    const handleLogout = () =>{
+        props.history.push ('/')
+    }
+    return (
         <Container flex>
-            <Grid 
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              xs = '8'
-              style = {{margin : 'auto'}}
-              >
-              <Main/>
+            <NotificationContainer/>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                xs='8'
+                style={{ margin: 'auto' }}
+            >
+                <Main/>
             </Grid>
         </Container>
     )
