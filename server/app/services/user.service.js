@@ -1,7 +1,7 @@
 const { compare, hash } = require('bcryptjs')
 const { exist, ServerError } = require('../models/my-error.model')
 const { User } = require('../models/user.model')
-const {sign, verify} = require('../helpers/jwt')
+const {sign} = require('../helpers/jwt')
 
 class UserService {
     static async signUp(username, plainPassword, name) {
