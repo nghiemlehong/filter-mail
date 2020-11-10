@@ -1,16 +1,18 @@
 import React from 'react'
 import { Container, Grid } from '@material-ui/core'
 import {Main} from '../components/home/Main'
-import {NotificationContainer} from 'react-notifications'
+import {removeSession} from '../utils/Common'
+
 
 export function Home(props) {
 
     const handleLogout = () =>{
         props.history.push ('/')
+        removeSession()
     }
+    
     return (
         <Container flex>
-            <NotificationContainer/>
             <Grid
                 container
                 direction="row"

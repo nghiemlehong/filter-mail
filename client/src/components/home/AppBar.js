@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {getName} from '../../utils/Common'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -118,7 +119,7 @@ export  function SearchAppBar(props) {
            />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Lê Hồng Nghiệm
+            {getName()}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -12,7 +12,12 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import {FormControl,InputLabel,OutlinedInput,InputAdornment,IconButton} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress'   
 
+import {UserAPI} from '../../api/userAPI'
+import {MyNotification} from '../../notifications/Notifications'
+import {Redirect} from 'react-router-dom'
+import {getToken, setUserSession} from '../../utils/Common'
 const useStyles = makeStyles({
     root: {
         width: 600,
@@ -27,11 +32,32 @@ export function MediaCard(props) {
     const classes = useStyles();
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [logged, setLogged] = useState(false)
+    const [username, setUsername] = useState('')
 
+   
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
     }
- 
+
+    const handleLogin = () =>
+    {   
+    
+        setLoading(true)
+        UserAPI.login({username, password})
+        .then(data =>{
+            setUserSession(data.user.token, data.user.name)
+            setLoading(false)
+            MyNotification.login(true)
+            setLogged(true)
+        })
+        .catch(err=>{
+            setLoading(false)
+            MyNotification.login(err.response.data.message)
+        })
+    }
+    if(logged) return <Redirect to="/home"/>
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -63,6 +89,8 @@ export function MediaCard(props) {
                     label="Tên đăng nhập"
                     variant="outlined"
                     style={{ width: 500 }}
+                    value = {username}
+                    onChange = {evt => setUsername(evt.target.value)}
                 />
                 <FormControl  variant="outlined" style={{ width: 500 }}>
                     <InputLabel htmlFor="outlined-adornment-password">Mật khẩu</InputLabel>
@@ -92,8 +120,10 @@ export function MediaCard(props) {
                     justifyContent: 'center',
                 }}
             >
-                <Button variant="contained" color="primary" disableElevation>
-                    ĐĂNG NHẬP
+                <Button variant="contained" color="primary" disableElevation
+                onClick = {handleLogin}
+                >
+                    ĐĂNG NHẬP {loading?<CircularProgress/>:''}
                 </Button>
                 <Button  
                 variant="outlined" 

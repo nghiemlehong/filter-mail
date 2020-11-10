@@ -5,9 +5,10 @@ const bodyParser = require('body-parser')
 const port = 9999 || process.env.PORT
 require('./app/helpers/DB')
 const server = require('http').Server(app)
-const io = require('socket.io')(server)
+let io = require('socket.io')(server)
+const cors = require('cors');
 const { userRouter } = require('./app/routes/user.routes')
-
+app.use(cors());
 app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
@@ -30,11 +31,17 @@ app.use((req, res, next) => {
 //Router
 app.use('/user', userRouter)
 
+// Xử lý real time 
+// io.on('connection', socket => {
+//     console.log("Co mot ket noi tu "+ socket.id)
+//     socket.on('disconnect',()=>{
+//         console.log('Da ngat ket noi' +  socket.id)
+//     })
+// })
+
 // Start Server
 server.listen(port, () => console.log('Server started !'))
 
-// Xử lý real time 
-io.on('connection', socket => {
-    
-})
+
+
 

@@ -4,10 +4,12 @@ import { Login } from './page/Login'
 import {Signup} from './page/Signup'
 import {Home} from './page/Home'
 import { BrowserRouter as Router, Route,Switch } from 'react-router-dom'
+import {NotificationContainer} from 'react-notifications'
 
 function App() {
   return (
     <div>
+      <NotificationContainer/>
       <Router>
         <Switch>
             <Route path ='/'  exact component = {Login} />
