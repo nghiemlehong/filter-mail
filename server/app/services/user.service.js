@@ -24,8 +24,8 @@ class UserService {
         exist(password, 'PASSSWORD_EMPTY', 400)
         const user = await User.findOne({username})
         exist(user, 'USER_NOT_EXITS',404)
-        const same = compare(password, user.password)
-        exist(same,"PASSWORD_INCORRECT",404 )
+        const same = await compare(password, user.password)
+        if(!same) throw new ServerError("PASSWORD_INCORRECT",419)
         user.password = undefined
         const userInfo = user.toObject()
         userInfo.token = await sign({_id : user._id})
