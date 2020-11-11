@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { MediaCard } from '../components/login/Card'
 import { Container } from '@material-ui/core'
 import { Grid } from '@material-ui/core'
-import {getToken} from '../utils/Common'
-import {Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 
 export function Login(props) {
 
+    let history = useHistory()
     const handleSignUp = () => {
-        props.history.push('/signup')
+        history.push('/signup')
         
     }
 

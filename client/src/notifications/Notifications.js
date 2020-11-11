@@ -4,25 +4,47 @@ import 'react-notifications/lib/notifications.css'
 export class MyNotification {
     static login(message) {
         switch (message) {
-            case "EMPTY_EMAIL":
-                NotificationManager.error("Email không được để trống !")
+            case "USER_NAME_EMPTY":
+                NotificationManager.error("Tên đăng nhập không được bỏ trống !", "", 3000)
                 break
-            case "EMPTY_PASSWORD":
-                NotificationManager.error("Mật khẩu không được để trống !")
+            case "PASSSWORD_EMPTY":
+                NotificationManager.error("Mật khẩu không được bỏ trống !", "", 3000)
+                break
+            case "USER_NOT_EXITS":
+                NotificationManager.error("Tên đăng nhập không tồn tại !", "", 3000)
                 break
             case "PASSWORD_INCORRECT":
-                NotificationManager.error("Mật khẩu không chính xác !")
-                break
-            case "CANT_FIND_USER":
-                NotificationManager.error("Không tìm thấy email người dùng !")
+                NotificationManager.error("Mật khẩu không chính xác !", "", 3000)
                 break
             case true:
-                NotificationManager.info("Đăng nhập thành công !")
+                NotificationManager.info("Đăng nhập thành công !", "", 3000)
+                break
+            default:
+                NotificationManager.info("Server quá tải !", "", 3000)
+
+        }
+    }
+    static signUp(message) {
+        switch (message) {
+            case "USER_NAME_EMPTY":
+                NotificationManager.error("Tên đăng nhập không được bỏ trống !", "", 3000)
+                break
+            case "PASSSWORD_EMPTY":
+                NotificationManager.error("Tên đăng nhập không được bỏ trống !", "", 3000)
+                break
+            case "NAME_EMPTY":
+                NotificationManager.error("Tên không được bỏ trống !", "", 3000)
+                break
+            case "USER_NAME_EXITS":
+                NotificationManager.error("Tên đăng nhập đã tồn tại !", "", 3000)
+                break
+            case true:
+                NotificationManager.info("Đăng ký tài khoản thành công!", "", 3000)
                 break
             default:
                 NotificationManager.info("Server quá tải !")
-
         }
+
     }
     static sendMail(message) {
         switch (message) {

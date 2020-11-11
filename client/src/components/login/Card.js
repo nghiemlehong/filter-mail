@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import {UserAPI} from '../../api/userAPI'
 import {MyNotification} from '../../notifications/Notifications'
 import {Redirect} from 'react-router-dom'
-import {getToken, setUserSession} from '../../utils/Common'
+import {setUserSession} from '../../utils/Common'
 const useStyles = makeStyles({
     root: {
         width: 600,
@@ -55,9 +55,11 @@ export function MediaCard(props) {
         .catch(err=>{
             setLoading(false)
             MyNotification.login(err.response.data.message)
+            console.log(err.response.data.message)
         })
     }
-    if(logged) return <Redirect to="/home"/>
+
+    if(logged) return <Redirect to = "/home"/>
     return (
         <Card className={classes.root}>
             <CardActionArea>

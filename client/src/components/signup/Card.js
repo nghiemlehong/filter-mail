@@ -13,6 +13,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@material-ui/core'
 
+import {useHistory} from 'react-router-dom'
+import {UserAPI} from '../../api/userAPI'
+import {MyNotification} from '../../notifications/Notifications'
 const useStyles = makeStyles({
     root: {
         width: 600,
@@ -25,13 +28,33 @@ const useStyles = makeStyles({
 })
 export function MediaCardSignup(props) {
     const classes = useStyles();
-    const [password, setPassword] = useState('')
+    const [username , setUsername] = useState('')
+    const [plainPassword, setPlainPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const [name, setName] = useState('')
+
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
     }
     
+    let history = useHistory()
+
+    const handleBack = ()=>{
+        history.push('/')
+    }
+    
+    const handleSignUp = ()=>{
+        UserAPI.signUp({username, plainPassword, name})
+        .then(result =>{
+            MyNotification.signUp(result.success)
+            history.push('/')
+        })
+        .catch(err => {
+            MyNotification.signUp(err.response.data.message)
+        })
+    }
+
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -63,14 +86,16 @@ export function MediaCardSignup(props) {
                     label="Tên đăng nhập"
                     variant="outlined"
                     style={{ width: 500 }}
+                    value = {username}
+                    onChange = {evt => setUsername(evt.target.value)}
                 />
                 <FormControl variant="outlined" style={{ width: 500 }}>
                     <InputLabel htmlFor="outlined-adornment-password">Mật khẩu</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
-                        onChange={(evt) => setPassword(evt.target.value)}
-                        value={password}
+                        onChange={(evt) => setPlainPassword(evt.target.value)}
+                        value={plainPassword}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -92,6 +117,8 @@ export function MediaCardSignup(props) {
                     label="Họ tên"
                     variant="outlined"
                     fullWidth
+                    value ={name}
+                    onChange = {evt => setName(evt.target.value)}
                 />
             </CardActions>
             <CardActions
@@ -100,13 +127,16 @@ export function MediaCardSignup(props) {
                     justifyContent: 'center',
                 }}
             >
-                <Button variant="contained" color="primary" disableElevation>
+                <Button 
+                variant="contained" color="primary" disableElevation
+                onClick = {handleSignUp}
+                >
                     ĐĂNG KÝ
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
-                    onClick={props.back}
+                    onClick={handleBack}
                 >
                     QUAY LẠI
                 </Button>

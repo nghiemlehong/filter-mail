@@ -4,10 +4,6 @@ import {MediaCardSignup} from '../components/signup/Card'
 
 export function Signup(props) {
 
-    const handleBack = ()=>{
-        props.history.push('/')
-    }
-
     return (
         <Container>
             <Grid
@@ -17,7 +13,6 @@ export function Signup(props) {
                  alignItems="center"
             >
                 <MediaCardSignup
-                back = {handleBack}
                 
                 />
             </Grid>
