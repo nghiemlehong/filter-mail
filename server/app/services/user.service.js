@@ -31,6 +31,15 @@ class UserService {
         userInfo.token = await sign({_id : user._id})
         return userInfo
     }
+
+    static async check(idUser) { 
+        const user = await User.findById(idUser);
+        if (!user) throw new ServerError('CANNOT_FIND_USER', 404);
+        const userInfo = user.toObject();
+        delete userInfo.password;  
+        userInfo.token = await sign({ _id: user._id }); 
+        return userInfo;      
+  }
 }
 
 module.exports = {UserService}

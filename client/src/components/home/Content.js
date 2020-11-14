@@ -11,7 +11,6 @@ import MailIcon from '@material-ui/icons/Mail'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 import SendIcon from '@material-ui/icons/Send';
 import {SendEmail} from './SendEmail'
-
 import {ControlledAccordions} from './Accordion'
 
 function TabPanel(props) {
@@ -70,7 +69,6 @@ export  function Content() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default"
-      
       >
         <Tabs
           value={value}
@@ -91,8 +89,6 @@ export  function Content() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction} >
-        
-            
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
             <ControlledAccordions

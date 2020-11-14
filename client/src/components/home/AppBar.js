@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {getName} from '../../utils/Common'
+import { getName } from '../../utils/Common'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,11 +82,11 @@ function SimpleMenu(props) {
 
   return (
     <div>
-      <Button  aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-         <AccountBoxRoundedIcon 
-         fontSize="large"
-         style={{ color: "white" }}
-         />
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <AccountBoxRoundedIcon
+          fontSize="large"
+          style={{ color: "white" }}
+        />
       </Button>
       <Menu
         id="simple-menu"
@@ -95,13 +95,13 @@ function SimpleMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={props.logout}><ExitToAppIcon/> Logout</MenuItem>
+        <MenuItem onClick={props.logout}><ExitToAppIcon /> Logout</MenuItem>
       </Menu>
     </div>
   );
 }
 
-export  function SearchAppBar(props) {
+export function SearchAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -114,9 +114,9 @@ export  function SearchAppBar(props) {
             color="inherit"
             aria-label="open drawer"
           >
-           <SimpleMenu
-            logout = {props.logout}
-           />
+            <SimpleMenu
+              logout={props.logout}
+            />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             {getName()}
