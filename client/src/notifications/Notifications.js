@@ -30,7 +30,7 @@ export class MyNotification {
                 NotificationManager.error("Tên đăng nhập không được bỏ trống !", "", 3000)
                 break
             case "PASSSWORD_EMPTY":
-                NotificationManager.error("Tên đăng nhập không được bỏ trống !", "", 3000)
+                NotificationManager.error("Mật khẩu không được bỏ trống !", "", 3000)
                 break
             case "NAME_EMPTY":
                 NotificationManager.error("Tên không được bỏ trống !", "", 3000)
@@ -48,8 +48,17 @@ export class MyNotification {
     }
     static sendMail(message) {
         switch (message) {
-            case "SEND_EMAIL":
-                NotificationManager.info("Bạn đã gửi mail thành công !")
+            case "TITLE_EMPTY":
+                NotificationManager.error("Tựa đề không được trống !", "", 3000)
+                break
+            case "CONTENT_EMPTY":
+                NotificationManager.error("Nội dung không đc trống !", "", 3000)
+                break
+            case "USER_NOT_EXIST":
+                NotificationManager.error("Không tìm thấy người nhận !", "", 3000)
+                break
+            case true:
+                NotificationManager.info("Gửi mail thành công !", "", 3000)
                 break
             default:
                 NotificationManager.info("Server quá tải !")

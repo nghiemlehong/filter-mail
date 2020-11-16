@@ -11,8 +11,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 import SendIcon from '@material-ui/icons/Send'
 import { SendEmail } from './SendEmail'
-import { ControlledAccordions } from './Accordion'
-
+import {TabMail} from './TabMail'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,14 +50,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '100%',
   },
-}));
+}))
 
-const defaultProps = {
-  bgcolor: 'background.paper',
-  borderColor: 'rgb(201, 201, 201)',
-  m: 1,
-  border: 1,
-};
+
 
 export function Content() {
   const classes = useStyles();
@@ -71,7 +65,7 @@ export function Content() {
 
   const handleChangeIndex = (index) => {
     setValue(index);
-  };  
+  };
 
   return (
     <div className={classes.root}>
@@ -96,46 +90,10 @@ export function Content() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction} >
+          <TabMail roleName = 'Normal'/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Box
-            style={{
-              padding: '5px',
-              overflowY: 'auto',
-              height: '320px',
-            }}
-            borderRadius = "borderRadius"
-            {...defaultProps}
-          >
-            <ControlledAccordions
-              name="Nghiệm Lê"
-              title="Tựa đề"
-              content="Nội dung"
-            />
-            <ControlledAccordions
-              name="Nghiệm Lê"
-              title="Tựa đề"
-              content="Nội dung"
-            />
-            <ControlledAccordions
-              name="Nghiệm Lê"
-              title="Tựa đề"
-              content="Nội dung"
-            />
-            <ControlledAccordions
-              name="Nghiệm Lê"
-              title="Tựa đề"
-              content="Nội dung"
-            />
-            <ControlledAccordions
-              name="Nghiệm Lê"
-              title="Tựa đề"
-              content="Nội dung"
-            />
-           
-          
-          </Box>
-
+          <TabMail roleName = "Normal"/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <SendEmail />

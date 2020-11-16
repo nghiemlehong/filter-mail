@@ -9,6 +9,7 @@ let io = require('socket.io')(server)
 const cors = require('cors');
 const { userRouter } = require('./app/routes/user.routes')
 const { roleRouter } = require('./app/routes/role.routes')
+const { mailRouter } = require('./app/routes/mail.routes')
 app.use(cors());
 app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 //Router
 app.use('/user', userRouter)
 app.use('/role', roleRouter)
+app.use('/mail', mailRouter)
 
 // Xử lý real time 
 // io.on('connection', socket => {

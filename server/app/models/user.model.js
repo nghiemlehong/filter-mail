@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     username : {type : String, required : true, unique : true},
     password : {type : String, required : true},
     name : {type : String, required : true},
-    mail : [{type : mongoose.Schema.Types.ObjectId, ref : 'Mail'}]
+    mails : [{type : mongoose.Schema.Types.ObjectId, ref : 'Mail'}]
 })
 const User = mongoose.model('User', userSchema)
 

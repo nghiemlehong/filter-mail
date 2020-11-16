@@ -53,7 +53,6 @@ export function MediaCard(props) {
         .catch(err=>{
             setLoading(false)
             MyNotification.login(err.response.data.message)
-            console.log(err.response.data.message)
         })
     }
 

@@ -4,23 +4,33 @@ const { User } = require('../models/user.model')
 const { Role } = require('../models/role.model')
 
 class MailService {
-    static async createMail(senderUsername, receiverUsername, title, content) {
+    static async createMail(idSender, receiverUsername, title, content) {
         exist(title, 'TITLE_EMPTY', 404)
         exist(content, 'CONTENT_EMPTY', 404)
-        const sender = await User.findOne({ username: senderUsername })
-        exist(sender, 'USER_NOT_EXIST', 404)
         const receiver = await User.findOne({ username: receiverUsername })
         exist(receiver, 'USER_NOT_EXIST', 404)
+        const role = await Role.findOne({ name: 'Normal' })
+        exist(role, "CANT_FIND_ROLE", 404)
         const mail = new Mail({
-            sender: sender._id,
-            receiver: username._id,
+            sender: idSender,
+            receiver: receiver._id,
             title,
             content,
-            role: '5fabc39a43fce02994b42d0f'
+            role: role._id
         })
-        await User.findByIdAndUpdate(sender._id,)
+        await User.findByIdAndUpdate(idSender, { $push: { mails: mail._id } })
+        await Role.findByIdAndUpdate(role._id, { $push: { mails: mail._id } })
         await mail.save()
         return mail
+    }
+
+    static async getMailByIdUser(idReceiver, roleName) {
+        exist(roleName, 'ROLE_EMPTY',404)
+        const role = await Role.findOne({ name: roleName })
+        exist(role, 'CANT_FIND_ROLE', 404)
+        const mails = Mail.find({ receiver: idReceiver, role: role._id })
+            .populate('sender', 'name')
+        return mails
     }
 }
 
