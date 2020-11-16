@@ -9,8 +9,8 @@ import {SearchAppBar} from './AppBar'
 const useStyles = makeStyles({
     root: {
         width: 800,
-        marginTop: "50px",
         padding: 5,
+        height : 600
     },
     media: {
         height: 140,
@@ -24,9 +24,7 @@ export function Main(props)
     return(
         <Card className={classes.root}>
             <Header/>
-            <SearchAppBar
-             logout = {props.logout}
-            />
+            <SearchAppBar/>
             <Content/>
         </Card>
     )

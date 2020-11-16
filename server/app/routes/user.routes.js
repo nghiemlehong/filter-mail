@@ -1,7 +1,7 @@
 const {UserService} = require('../services/user.service')
 const express = require('express')
 const { User } = require('../models/user.model')
-
+const {mustBeUser} =  require('./mustBeUser.middleware')
 const userRouter  = express.Router()
 
 userRouter.post('/login',(req,res)=>{
@@ -15,6 +15,12 @@ userRouter.post('/signUp',(req,res)=>{
     const {username, plainPassword, name } = req.body
     UserService.signUp(username, plainPassword, name)
     .then(user=>res.send({success : true, user}))
+    .catch(res.onError)
+})
+
+userRouter.post('/check',mustBeUser,(req,res)=>{
+    UserService.check(req.idUser)
+    .then(user => res.send({success : true, user}))
     .catch(res.onError)
 })
 

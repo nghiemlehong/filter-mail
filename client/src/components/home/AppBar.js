@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,8 +11,10 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { getName } from '../../utils/Common'
-
+import { getToken } from '../../utils/Common'
+import { useHistory } from 'react-router-dom'
+import { removeToken, setToken } from '../../utils/Common'
+import { UserAPI } from '../../api/userAPI'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +82,13 @@ function SimpleMenu(props) {
     setAnchorEl(null);
   };
 
+  let history = useHistory()
+  const handleLogOut = () => {
+    history.push('/')
+    removeToken()
+
+  }
+
   return (
     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -95,14 +104,26 @@ function SimpleMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={props.logout}><ExitToAppIcon /> Logout</MenuItem>
+        <MenuItem onClick={handleLogOut}><ExitToAppIcon /> Logout</MenuItem>
       </Menu>
     </div>
   );
 }
 
+
 export function SearchAppBar(props) {
   const classes = useStyles();
+
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    UserAPI.check({ headers: { token: getToken() } })
+      .then(data => {
+        setName(data.user.name)
+        setToken(data.user.token)
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -114,12 +135,10 @@ export function SearchAppBar(props) {
             color="inherit"
             aria-label="open drawer"
           >
-            <SimpleMenu
-              logout={props.logout}
-            />
+            <SimpleMenu />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            {getName()}
+            {name}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

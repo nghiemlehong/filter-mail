@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import {UserAPI} from '../../api/userAPI'
 import {MyNotification} from '../../notifications/Notifications'
 import {Redirect} from 'react-router-dom'
-import {setUserSession} from '../../utils/Common'
+import {setToken} from '../../utils/Common'
 const useStyles = makeStyles({
     root: {
         width: 600,
@@ -30,24 +30,22 @@ const useStyles = makeStyles({
 })
 export function MediaCard(props) {
     const classes = useStyles();
+
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const [logged, setLogged] = useState(false)
     const [username, setUsername] = useState('')
 
-   
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
     }
 
-    const handleLogin = () =>
-    {   
-    
+    const handleLogin = () =>{   
         setLoading(true)
         UserAPI.login({username, password})
         .then(data =>{
-            setUserSession(data.user.token, data.user.name)
+            setToken(data.user.token)
             setLoading(false)
             MyNotification.login(true)
             setLogged(true)

@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
 
 const handleSendMail = ()=>{
     MyNotification.sendMail('SEND_EMAIL')
-    console.log('vao roi')
 }
 
 export  function SendEmail() {
@@ -41,7 +40,6 @@ export  function SendEmail() {
       <Button variant = "contained" color = "secondary" fullWidth
       onClick = {handleSendMail}
       >
-         
          GỬI ĐI
       </Button>
     </form>

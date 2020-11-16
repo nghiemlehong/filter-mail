@@ -34,11 +34,11 @@ class UserService {
 
     static async check(idUser) { 
         const user = await User.findById(idUser);
-        if (!user) throw new ServerError('CANNOT_FIND_USER', 404);
-        const userInfo = user.toObject();
+        exist(user,'CANT_NOT_FIND_USER')
+        const userInfo = user.toObject()
         delete userInfo.password;  
         userInfo.token = await sign({ _id: user._id }); 
-        return userInfo;      
+        return userInfo;         
   }
 }
 

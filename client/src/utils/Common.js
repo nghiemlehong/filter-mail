@@ -1,17 +1,12 @@
-export const getName = () => {
-   return sessionStorage.getItem('name') || null
-}
-
 export const getToken = () => {
-    return sessionStorage.getItem('token') || null
+    return sessionStorage.getItem('token') || null;
 }
 
-export const removeSession = () => {
-    sessionStorage.removeItem('token')
-    sessionStorage.removeItem('name')
+export const removeToken = () => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
 }
 
-export const setUserSession = (token, name) => {
+export const setToken = token => {
     sessionStorage.setItem('token', token)
-    sessionStorage.setItem('name', name)
 }
