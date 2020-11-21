@@ -10,6 +10,7 @@ const cors = require('cors');
 const { userRouter } = require('./app/routes/user.routes')
 const { roleRouter } = require('./app/routes/role.routes')
 const { mailRouter } = require('./app/routes/mail.routes')
+const { nghiem } = require('./app/svm/SVM')
 app.use(cors());
 app.use(express.static('./public'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,6 +42,9 @@ app.use('/mail', mailRouter)
 //         console.log('Da ngat ket noi' +  socket.id)
 //     })
 // })
+//SVM
+
+
 
 // Start Server
 server.listen(port, () => console.log('Server started !'))

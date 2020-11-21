@@ -8,6 +8,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Box } from '@material-ui/core';
+//Dialog
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,12 +35,39 @@ export function ControlledAccordions(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
     <div className={classes.root}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Bạn muốn xóa thư này ?</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -51,17 +83,18 @@ export function ControlledAccordions(props) {
           </Typography>
         </AccordionDetails>
         <Box
-          borderTop = {1}
-          borderColor = 'grey.400'
+          borderTop={1}
+          borderColor='grey.400'
           style={{
             display: 'flex',
-            justifyContent : 'center',
-            alignItems : 'center'
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
           <Button variant='contained' color='secondary' startIcon={<DeleteIcon />}
             style={{
               margin: '5px',
             }}
+            onClick={handleClickOpen}
           >
             Xóa
         </Button>

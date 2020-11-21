@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient'
 
 export class MailAPI {
-
+    
     static async createMail(body, headers){
         const url ='/mail/'
         const result = await axiosClient.post(url, body, headers)

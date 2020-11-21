@@ -1,6 +1,7 @@
 import axiosClient from './axiosClient'
 
 export class UserAPI{
+    
     static async login(body){
         const url = "/user/login"
         const result = await axiosClient.post(url,body)

@@ -9,15 +9,15 @@ export function TabMail(props) {
     const [mails, setMails] = useState([])
 
     useEffect(() => {
-        const body = {roleName : 'Normal'}
+        const body = { roleName: 'Normal' }
         const headers = { headers: { token: getToken() } }
         console.log(body)
         MailAPI.getMail(body, headers)
-        .then(data =>{
-            console.log(data)
-            setMails(data.mails)
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                console.log(data)
+                setMails(data.mails)
+            })
+            .catch(err => console.log(err))
     }, [])
 
     const defaultProps = {
@@ -36,18 +36,19 @@ export function TabMail(props) {
             />)
     }
 
-    
+
     return (
         <Box
             style={{
                 padding: '5px',
                 overflowY: 'auto',
                 height: '320px',
+                backgroundColor : 'rgb(250, 250, 250)'
             }}
             borderRadius="borderRadius"
             {...defaultProps}
         >
-           {renderMails}
+            {renderMails()}
         </Box>
     )
 }
