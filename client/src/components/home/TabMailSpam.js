@@ -4,12 +4,12 @@ import { getToken } from '../../utils/Common'
 import { MailAPI } from '../../api/mailAPI'
 import Box from '@material-ui/core/Box'
 
-export function TabMail(props) {
+export function TabMailSpam(props) {
 
     const [mails, setMails] = useState([])
 
     useEffect(() => {
-        const body = { roleName: 'Normal' }
+        const body = { roleName: 'Spam' }
         const headers = { headers: { token: getToken() } }
         console.log(body)
         MailAPI.getMail(body, headers)

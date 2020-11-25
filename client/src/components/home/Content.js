@@ -11,7 +11,8 @@ import MailIcon from '@material-ui/icons/Mail'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 import SendIcon from '@material-ui/icons/Send'
 import { SendEmail } from './SendEmail'
-import {TabMail} from './TabMail'
+import { TabMailNormal} from './TabMailNormal'
+import { TabMailSpam } from './TabMailSpam'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -90,10 +91,10 @@ export function Content() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction} >
-          <TabMail roleName = 'Normal'/>
+          <TabMailNormal/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <TabMail roleName = "Normal"/>
+          <TabMailSpam/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <SendEmail />

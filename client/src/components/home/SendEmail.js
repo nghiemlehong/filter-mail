@@ -29,16 +29,21 @@ export function SendEmail() {
   }
 
   const handleSendMail = () => {
-    const body = { receiverUsername, title, content }
-    const headers = { headers: { token: getToken() } }
-    MailAPI.createMail(body, headers)
-      .then(data => {
+    const sendMail = async()=>{
+      try{
+        const headers = { headers: { token: getToken() } }
+        const role = await MailAPI.checkRole({content})
+        const body = { receiverUsername, title, content, role : role.name }
+        console.log(role.name)
+        const data = await MailAPI.createMail(body,headers)
+        console.log(data)
         MyNotification.sendMail(data.success)
-        resetState()
-      })
-      .catch(err => {
-        MyNotification.sendMail(err.response.data.message)
-      })
+      }catch(err){
+        console.log(err)
+      }
+    }
+   sendMail()
+   resetState()
   }
 
   return (

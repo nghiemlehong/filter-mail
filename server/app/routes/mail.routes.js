@@ -4,8 +4,8 @@ const { mustBeUser } = require('./mustBeUser.middleware')
 const mailRouter = express.Router()
 
 mailRouter.post('/', mustBeUser, (req, res) => {
-    const { receiverUsername, title, content } = req.body
-    MailService.createMail(req.idUser, receiverUsername, title, content)
+    const { receiverUsername, title, content, role } = req.body
+    MailService.createMail(req.idUser, receiverUsername, title, content,role)
         .then(mail => res.send({ success: true, mail }))
         .catch(res.onError)
 })
@@ -14,6 +14,13 @@ mailRouter.post('/getMail', mustBeUser, (req, res) => {
     const { roleName } = req.body
     MailService.getMailByIdUser(req.idUser, roleName)
         .then(mails => res.send({ success: true, mails }))
+        .catch(res.onError)
+})
+
+mailRouter.delete('/:_id', mustBeUser, (req, res) => {
+    const { _id } = req.params
+    MailService.deleteMail(_id)
+        .then(mail => res.send({ success: true, mail }))
         .catch(res.onError)
 })
 
