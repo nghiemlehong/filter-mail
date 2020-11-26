@@ -28,7 +28,7 @@ class MailService {
         exist(roleName, 'ROLE_EMPTY', 404)
         const role = await Role.findOne({ name: roleName })
         exist(role, 'CANT_FIND_ROLE', 404)
-        const mails = Mail.find({ receiver: idReceiver, role: role._id, deleted: false })
+        const mails = Mail.find({ receiver: idReceiver, role: role._id, deleted: false }).sort({_id :-1})
             .populate('sender', 'name')
         return mails
     }

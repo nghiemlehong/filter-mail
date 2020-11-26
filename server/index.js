@@ -32,6 +32,7 @@ app.use('/user', userRouter)
 app.use('/role', roleRouter)
 app.use('/mail', mailRouter)
 // Xử lý real time 
+
 //SVM
 const { SVC } = require('machinelearn/svm')
 const fs = require('fs')
@@ -60,7 +61,7 @@ const trainData = async () =>{
         console.log('Đang train...')
         load.fit(train, labels)
         console.log('Train xong')
-        console.log(`Độ chính xác của dự đoán ${doChinhXac(load.predict(train), labels)} %`)
+        console.log(`Độ chính xác của dự đoán : ${doChinhXac(load.predict(train), labels)} %`)
     app.post('/svm',(req,res)=>{
         const {content} = req.body
         const text =  cv.transform([content])
