@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import {useSelector} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -38,7 +37,6 @@ export function MediaCard(props) {
     const [logged, setLogged] = useState(false)
     const [username, setUsername] = useState('')
 
-    const demo = useSelector(state => state.listMail.list)
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
