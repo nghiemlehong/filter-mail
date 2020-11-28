@@ -8,17 +8,22 @@ export function TabMailSpam(props) {
 
     const [mails, setMails] = useState([])
 
-    useEffect(() => {
+    const fetchData = ()=>{
         const body = { roleName: 'Spam' }
         const headers = { headers: { token: getToken() } }
-        console.log(body)
         MailAPI.getMail(body, headers)
             .then(data => {
-                console.log(data)
                 setMails(data.mails)
             })
             .catch(err => console.log(err))
+    }
+    useEffect(() => {
+        fetchData()
     }, [])
+
+    const resetMails = ()=>{
+        fetchData()
+    }
 
     const defaultProps = {
         bgcolor: 'background.paper',
@@ -33,6 +38,8 @@ export function TabMailSpam(props) {
                 name={mail.sender.name}
                 title={mail.title}
                 content={mail.content}
+                _id = {mail._id}
+                reset = {resetMails}
             />)
     }
 

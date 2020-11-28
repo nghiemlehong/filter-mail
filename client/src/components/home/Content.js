@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export function Content() {
+export function Content(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -68,6 +68,8 @@ export function Content() {
     setValue(index);
   };
 
+  
+  
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default"

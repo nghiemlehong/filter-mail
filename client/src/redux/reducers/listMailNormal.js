@@ -1,5 +1,5 @@
 const defaultState = {
-    listNormal: ['nghiem','hieu'],
+    listNormal: [],
 }
 
 export const listMailReducers = (state = defaultState, action) => {

@@ -34,7 +34,7 @@ class MailService {
     }
 
     static async deleteMail(idMail) {
-        const mail = await Mail.findByIdAndUpdate(idMail, { $pull: { deleted: true } })
+        const mail = await Mail.findByIdAndUpdate(idMail, { $set: { deleted: true } })
         exist(mail, 'MAIL_NOT_FOUND', 404)
         return mail
     }

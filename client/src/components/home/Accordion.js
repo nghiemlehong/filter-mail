@@ -15,7 +15,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 //API
-
+import {MailAPI} from '../../api/mailAPI'
+import {getToken} from '../../utils/Common'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,13 @@ export function ControlledAccordions(props) {
   };
 
   const handleAgreeDelete = () => {
-    
+    const headers = { headers: { token: getToken() } }
+    console.log(props._id)
+    MailAPI.deleteMail(props._id,headers)
+    .then(data=>{
+        props.reset()
+    })
+    .catch(err => alert(err))
     setOpen(false)
   }
 
@@ -108,7 +115,7 @@ export function ControlledAccordions(props) {
             }}
             onClick={handleClickOpenDialog}
           >
-            Xóa
+            Xóa {props._id}
         </Button>
         </Box>
       </Accordion>

@@ -7,6 +7,7 @@ export class MailAPI {
         const result = await axiosClient.post(url,body)
         return result
     }
+    
     static async createMail(body, headers) {
         const url = '/mail/'
         const result = await axiosClient.post(url, body, headers)
@@ -19,9 +20,9 @@ export class MailAPI {
         return result
     }
 
-    static async deleteMail(body, headers) {
-        const url = '/mail/'
-        const result = await axiosClient.delete(url, body, headers)
+    static async deleteMail(_id, headers) {
+        const url = `/mail/${_id}`
+        const result = await axiosClient.delete(url,headers)
         return result
     }
 }
