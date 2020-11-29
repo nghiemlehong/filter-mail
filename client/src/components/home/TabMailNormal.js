@@ -3,6 +3,7 @@ import { ControlledAccordions } from './Accordion'
 import { getToken } from '../../utils/Common'
 import { MailAPI } from '../../api/mailAPI'
 import Box from '@material-ui/core/Box'
+import Alert from '@material-ui/lab/Alert'
 
 export function TabMailNormal(props) {
 
@@ -32,6 +33,7 @@ export function TabMailNormal(props) {
     };
 
     const renderMails = () => {
+        if(mails.length ===0) return <Alert severity="warning">Chưa có thư nào!</Alert>
         return mails.map(mail =>
             <ControlledAccordions
                 name={mail.sender.name}

@@ -115,7 +115,7 @@ export function ControlledAccordions(props) {
             }}
             onClick={handleClickOpenDialog}
           >
-            Xóa {props._id}
+            Xóa 
         </Button>
         </Box>
       </Accordion>

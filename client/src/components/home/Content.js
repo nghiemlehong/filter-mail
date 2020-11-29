@@ -11,7 +11,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 import SendIcon from '@material-ui/icons/Send'
 import { SendEmail } from './SendEmail'
-import { TabMailNormal} from './TabMailNormal'
+import { TabMailNormal } from './TabMailNormal'
 import { TabMailSpam } from './TabMailSpam'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-
-
 export function Content(props) {
   const classes = useStyles();
   const theme = useTheme();
@@ -68,8 +66,8 @@ export function Content(props) {
     setValue(index);
   };
 
-  
-  
+
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default"
@@ -82,9 +80,9 @@ export function Content(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab icon={<MailIcon />} {...a11yProps(0)} />
-          <Tab icon={<DeleteSweepIcon />} {...a11yProps(1)} />
-          <Tab icon={<SendIcon />} {...a11yProps(2)} />
+          <Tab icon={<MailIcon />} {...a11yProps(0)} label='Hộp thư đến' />
+          <Tab icon={<DeleteSweepIcon />} {...a11yProps(1)} label='Thư rác' />
+          <Tab icon={<SendIcon />} {...a11yProps(2)} label = 'Gửi thư'/>
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -93,10 +91,10 @@ export function Content(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction} >
-          <TabMailNormal/>
+          <TabMailNormal />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <TabMailSpam/>
+          <TabMailSpam />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <SendEmail />

@@ -10,7 +10,6 @@ export function Login(props) {
     let history = useHistory()
     const handleSignUp = () => {
         history.push('/signup')
-        
     }
 
     return (
