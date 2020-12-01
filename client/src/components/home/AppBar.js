@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import React, { useState, useEffect } from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import { fade, makeStyles } from '@material-ui/core/styles'
+import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded'
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { getToken } from '../../utils/Common'
 import { useHistory } from 'react-router-dom'
 import { removeToken, setToken } from '../../utils/Common'
@@ -116,6 +114,8 @@ export function SearchAppBar(props) {
 
   const [name, setName] = useState('')
 
+  
+
   useEffect(() => {
     UserAPI.check({ headers: { token: getToken() } })
       .then(data => {
@@ -140,19 +140,7 @@ export function SearchAppBar(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             {name}
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Tìm kiếm..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+         
         </Toolbar>
       </AppBar>
     </div>

@@ -56,7 +56,7 @@ const doChinhXac = (a, b) => {
     return dem / a.length * 100
 }
 const trainData = async () =>{
-        const svm = new SVC({ cost: 0.8, gamma: 0.02})
+        const svm = new SVC({ cost: 0.8, gamma: 0.02, kernel : 'RBF'})
         const load = await svm.loadASM()
         console.log('Đang train...')
         load.fit(train, labels)
