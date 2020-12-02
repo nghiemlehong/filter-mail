@@ -86,7 +86,6 @@ export function ControlledAccordions(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

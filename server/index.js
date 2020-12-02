@@ -32,7 +32,6 @@ app.use('/user', userRouter)
 app.use('/role', roleRouter)
 app.use('/mail', mailRouter)
 // Xử lý real time 
-
 //SVM
 const { SVC } = require('machinelearn/svm')
 const fs = require('fs')
@@ -55,19 +54,19 @@ const doChinhXac = (a, b) => {
     }
     return dem / a.length * 100
 }
-const trainData = async () =>{
-        const svm = new SVC({ cost: 0.8, gamma: 0.02, kernel : 'RBF'})
-        const load = await svm.loadASM()
-        console.log('Đang train...')
-        load.fit(train, labels)
-        console.log('Train xong')
-        console.log(`Độ chính xác của dự đoán : ${doChinhXac(load.predict(train), labels)} %`)
-    app.post('/svm',(req,res)=>{
-        const {content} = req.body
-        const text =  cv.transform([content])
+const trainData = async () => {
+    const svm = new SVC({ cost: 0.8, gamma: 0.02, kernel: 'RBF' })
+    const load = await svm.loadASM()
+    console.log('Đang train...')
+    load.fit(train, labels)
+    console.log('Train xong')
+    console.log(`Độ chính xác của dự đoán : ${doChinhXac(load.predict(train), labels)} %`)
+    app.post('/svm', (req, res) => {
+        const { content } = req.body
+        const text = cv.transform([content])
         let role = 'Normal'
-        if(load.predict(text)[0]===1) {role = 'Spam'}
-        res.send({success : true ,name : role})
+        if (load.predict(text)[0] === 1) { role = 'Spam' }
+        res.send({ success: true, name: role })
     })
 }
 trainData()
