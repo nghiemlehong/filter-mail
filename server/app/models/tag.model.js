@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const roleSchema = new mongoose.Schema({
+const tagSchema = new mongoose.Schema({
     name: { type: String, required: true , unique : true},
     mails : [{type : mongoose.Schema.Types.ObjectId, ref : 'Mail'}]
 })
-const Role = mongoose.model('Role', roleSchema)
+const Tag = mongoose.model('Tag', tagSchema)
 
-module.exports = { Role }
+module.exports = { Tag }

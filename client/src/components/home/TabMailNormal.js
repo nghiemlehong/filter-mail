@@ -9,7 +9,7 @@ export function TabMailNormal(props) {
 
     const [mails, setMails] = useState([])
     const fetchDataMail = () => {
-        const body = { roleName: 'Normal' }
+        const body = { tagName: 'Normal' }
         const headers = { headers: { token: getToken() } }
         MailAPI.getMail(body, headers)
             .then(data => {

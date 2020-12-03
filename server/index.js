@@ -7,7 +7,7 @@ const server = require('http').Server(app)
 let io = require('socket.io')(server)
 const cors = require('cors');
 const { userRouter } = require('./app/routes/user.routes')
-const { roleRouter } = require('./app/routes/role.routes')
+const { tagRouter } = require('./app/routes/tag.routes')
 const { mailRouter } = require('./app/routes/mail.routes')
 app.use(cors());
 app.use(express.static('./public'))
@@ -29,9 +29,8 @@ app.use((req, res, next) => {
 });
 //Router
 app.use('/user', userRouter)
-app.use('/role', roleRouter)
+app.use('/tag', tagRouter)
 app.use('/mail', mailRouter)
-// Xử lý real time 
 //SVM
 const { SVC } = require('machinelearn/svm')
 const fs = require('fs')
@@ -41,6 +40,7 @@ let rawdata = fs.readFileSync('public/spam.json')
 let data = JSON.parse(rawdata)
 let labels = []
 let mailText = []
+
 data.map(x => {
     if (x.Label === 'spam') labels.push(1)
     else labels.push(0)
@@ -64,9 +64,9 @@ const trainData = async () => {
     app.post('/svm', (req, res) => {
         const { content } = req.body
         const text = cv.transform([content])
-        let role = 'Normal'
-        if (load.predict(text)[0] === 1) { role = 'Spam' }
-        res.send({ success: true, name: role })
+        let tag = 'Normal'
+        if (load.predict(text)[0] === 1) { tag = 'Spam' }
+        res.send({ success: true, name: tag })
     })
 }
 trainData()

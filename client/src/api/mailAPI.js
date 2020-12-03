@@ -2,7 +2,7 @@ import axiosClient from './axiosClient'
 
 export class MailAPI {
 
-    static async checkRole(body){
+    static async checkTag(body){
         const url ='/svm'
         const result = await axiosClient.post(url,body)
         return result

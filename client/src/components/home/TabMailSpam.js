@@ -11,7 +11,7 @@ export function TabMailSpam(props) {
     const [mails, setMails] = useState([])
 
     const fetchData = ()=>{
-        const body = { roleName: 'Spam' }
+        const body = { tagName: 'Spam' }
         const headers = { headers: { token: getToken() } }
         MailAPI.getMail(body, headers)
             .then(data => {

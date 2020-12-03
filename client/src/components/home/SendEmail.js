@@ -32,11 +32,9 @@ export function SendEmail() {
     const sendMail = async()=>{
       try{
         const headers = { headers: { token: getToken() } }
-        const role = await MailAPI.checkRole({content})
-        const body = { receiverUsername, title, content, role : role.name }
-        console.log(role.name)
+        const tag = await MailAPI.checkTag({content})
+        const body = { receiverUsername, title, content, tag : tag.name }
         const data = await MailAPI.createMail(body,headers)
-        console.log(data)
         MyNotification.sendMail(data.success)
       }catch(err){
         console.log(err)
