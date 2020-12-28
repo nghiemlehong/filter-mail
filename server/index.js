@@ -43,7 +43,7 @@ let mailTextTrain = []
 let labelsTest = []
 let mailTextTest = []
 
-function removeVietnameseTones(str) {
+function removeSpecialCharacters(str) {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
     str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
     str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
@@ -59,9 +59,6 @@ function removeVietnameseTones(str) {
     str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
     str = str.replace(/Đ/g, "D");
     // Some system encode vietnamese combining accent as individual utf-8 characters
-    // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
-    str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
-    str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
     // Remove extra spaces
     // Bỏ các khoảng trắng liền nhau
     str = str.replace(/ + /g," ");
@@ -75,12 +72,12 @@ function removeVietnameseTones(str) {
 dataTrain.map(x => {
     if (x.Label === 'spam') labelsTrain.push(1)
     else labelsTrain.push(0)
-    mailTextTrain.push(removeVietnameseTones(x.EmailText))
+    mailTextTrain.push(removeSpecialCharacters(x.EmailText))
 })
 dataTest.map(x => {
     if (x.Label === 'spam') labelsTest.push(1)
     else labelsTest.push(0)
-    mailTextTest.push(removeVietnameseTones(x.EmailText))
+    mailTextTest.push(removeSpecialCharacters(x.EmailText))
 })
 
 
@@ -89,7 +86,7 @@ let cv = new CountVectorizer()
 
 let train = cv.fit_transform(mailTextTrain)
 let test = cv.transform(mailTextTest)
-
+console.log(cv.getFeatureNames())
 const doChinhXac = (a, b) => {
     let dem = 0;
     for (let i = 0; i < a.length; i++) {
@@ -107,8 +104,8 @@ const trainData = async () => {
     console.log(`Độ chính xác của dự đoán : ${doChinhXac(load.predict(test), labelsTest)} %`)
     app.post('/svm', (req, res) => {
         const { content } = req.body
-        let removeVietnamese = removeVietnameseTones(content)
-        const text = cv.transform([removeVietnamese])
+        let removeSpecial = removeSpecialCharacters(content)
+        const text = cv.transform([removeSpecial])
         let tag = 'Normal'
         if (load.predict(text)[0] === 1) { tag = 'Spam' }
         res.send({ success: true, name: tag })

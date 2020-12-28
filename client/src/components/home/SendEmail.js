@@ -36,12 +36,14 @@ export function SendEmail() {
         const body = { receiverUsername, title, content, tag : tag.name }
         const data = await MailAPI.createMail(body,headers)
         MyNotification.sendMail(data.success)
+        resetState()
+
       }catch(err){
         console.log(err)
+        MyNotification.sendMail(err.response.data.message)
       }
     }
    sendMail()
-   resetState()
   }
 
   return (
